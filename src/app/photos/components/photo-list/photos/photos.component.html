@@ -1,0 +1,14 @@
+<ol class="list-unstyled" *ngIf="photos.length > 0; else noPhotos">
+  <li *ngFor="let cols of rows" class="row">
+    <div *ngFor="let photo of cols" class="col-4">
+      <ap-photo [url]="photo.url" [description]="photo.description"></ap-photo>
+    </div>
+  </li>
+</ol>
+<ng-template #noPhotos>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Sorry, no photos</h1>
+    </div>
+  </div>
+</ng-template>
