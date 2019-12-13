@@ -1,0 +1,10 @@
+<div class="text-center mt-3 mb-3">
+  <input
+    class="search"
+    type="search"
+    placeholder="Search..."
+    autofocus
+    (keyup)="debounce.next($event.target.value)"
+    (blur)="debounce.next($event.target.value)"
+  />
+</div>

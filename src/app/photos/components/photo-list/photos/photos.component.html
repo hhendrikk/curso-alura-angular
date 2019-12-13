@@ -1,7 +1,15 @@
 <ol class="list-unstyled" *ngIf="photos.length > 0; else noPhotos">
   <li *ngFor="let cols of rows" class="row">
     <div *ngFor="let photo of cols" class="col-4">
-      <ap-photo [url]="photo.url" [description]="photo.description"></ap-photo>
+      <ap-photo
+        [url]="photo.url"
+        [description]="photo.description"
+        apFilterGrayscale
+      ></ap-photo>
+      <ap-comments-likes
+        [comments]="photo.comments"
+        [likes]="photo.likes"
+      ></ap-comments-likes>
     </div>
   </li>
 </ol>
