@@ -6,10 +6,17 @@ import { AppComponent } from './app.component';
 
 import { ErrorsModule } from './errors/errors.module';
 import { PhotosModule } from './photos/photos.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, ErrorsModule, PhotosModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    ErrorsModule,
+    HomeModule,
+    PhotosModule,
+    AppRoutingModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

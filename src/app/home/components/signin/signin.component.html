@@ -1,0 +1,34 @@
+<form [formGroup]="formSignin" class="form-signin" (submit)="logar()">
+  <h1>Please sign in</h1>
+  <label for="inputUsername" class="sr-only">User name</label>
+  <input
+    #inputUserName
+    type="text"
+    id="inputUsername"
+    class="form-control"
+    placeholder="User name"
+    formControlName="username"
+    autofocus
+  />
+  <ap-vmessage
+    text="User name is required"
+    *ngIf="formSignin.get('username').errors?.required"
+  ></ap-vmessage>
+
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input
+    type="password"
+    id="inputPassword"
+    class="form-control"
+    placeholder="Password"
+    formControlName="password"
+  />
+  <ap-vmessage
+    text="Password id required"
+    *ngIf="formSignin.get('password').errors?.required"
+  ></ap-vmessage>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">
+    Sign in
+  </button>
+</form>
