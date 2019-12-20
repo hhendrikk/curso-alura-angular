@@ -5,11 +5,14 @@ import { NotFoundPageComponent } from './errors/components/not-found-page/not-fo
 import { PhotoListComponent } from './photos/components/photo-list/photo-list.component';
 import { PhotoListResolver } from './photos/components/photo-list/photo-list.resolver';
 import { SigninComponent } from './home/components/signin/signin.component';
+import { AuthGuard } from './core/auth/auth.guard';
+import { PermissionGuard } from './core/auth/permission.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: SigninComponent
+    component: SigninComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'user/:username',
@@ -20,7 +23,8 @@ const routes: Routes = [
     component: PhotoListComponent,
     resolve: {
       photos: PhotoListResolver
-    }
+    },
+    canActivate: [PermissionGuard]
   },
   { path: '**', component: NotFoundPageComponent }
 ];

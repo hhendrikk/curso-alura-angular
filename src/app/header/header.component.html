@@ -1,6 +1,15 @@
 <nav class="navbar navbar-light bg-light">
   <span class="navbar-brand mb-0 h1">ALURApic</span>
-  <div class="navbar-text">
-    <span></span>
+
+  <div class="navbar-text" *ngIf="user$ | async as user; else nologon">
+    <i class="fa fa-user-circle mr-1"></i>
+    <a class="mr-1">{{ user.name }}</a>
+    <a (click)="logout()">(Logout)</a>
   </div>
+
+  <ng-template #nologon>
+    <span class="navbar-text">
+      <a [routerLink]="['']">Please, login!</a>
+    </span>
+  </ng-template>
 </nav>
