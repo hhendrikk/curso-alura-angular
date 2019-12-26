@@ -1,0 +1,115 @@
+<h4 class="text-center">Register to embrance a new world!</h4>
+
+<form [formGroup]="signupForm" class="form mt-4" (submit)="signup()">
+  <div class="form-group">
+    <input
+      formControlName="email"
+      type="text"
+      placeholder="email"
+      class="form-control"
+      autofocus
+    />
+    <ap-vmessage
+      *ngIf="error.has('email', 'required')"
+      text="Email is required!"
+    ></ap-vmessage>
+    <ap-vmessage
+      *ngIf="error.has('email', 'email')"
+      text="Email is invalid!"
+    ></ap-vmessage>
+  </div>
+
+  <div class="form-group">
+    <input
+      formControlName="fullName"
+      type="text"
+      class="form-control"
+      placeholder="full name"
+    />
+    <ap-vmessage
+      *ngIf="error.has('fullName', 'required')"
+      text="Full name is required!"
+    >
+    </ap-vmessage>
+    <ap-vmessage
+      *ngIf="error.has('fullName', 'minlength')"
+      text="Minimum length is 2"
+    >
+    </ap-vmessage>
+    <ap-vmessage
+      *ngIf="error.has('fullName', 'maxlength')"
+      text="Maximum length is 40"
+    >
+    </ap-vmessage>
+  </div>
+
+  <div class="form-group">
+    <input
+      formControlName="userName"
+      type="text"
+      class="form-control"
+      placeholder="user name"
+    />
+    <ap-vmessage
+      *ngIf="error.has('userName', 'required')"
+      text="User name is required!"
+    >
+    </ap-vmessage>
+    <ap-vmessage
+      *ngIf="error.has('userName', 'minlength')"
+      text="Minimum length is 2"
+    >
+    </ap-vmessage>
+    <ap-vmessage
+      *ngIf="error.has('userName', 'maxlength')"
+      text="Maximum length is 30"
+    >
+    </ap-vmessage>
+    <ap-vmessage
+      *ngIf="error.has('userName', 'lowerCase')"
+      text="Must be lower case"
+    >
+    </ap-vmessage>
+    <ap-vmessage
+      *ngIf="error.has('userName', 'userNameTaken')"
+      text="User name is not available"
+    >
+    </ap-vmessage>
+    <small class="block text-success" *ngIf="signupForm.get('userName').valid">
+      User name available
+    </small>
+  </div>
+
+  <div class="form-group">
+    <input
+      formControlName="password"
+      type="password"
+      class="form-control"
+      placeholder="password"
+    />
+    <ap-vmessage
+      *ngIf="error.has('password', 'required')"
+      text="Password is required!"
+    >
+    </ap-vmessage>
+    <ap-vmessage
+      *ngIf="error.has('password', 'minlength')"
+      text="Minimum length is 8"
+    >
+    </ap-vmessage>
+    <ap-vmessage
+      *ngIf="error.has('password', 'maxlength')"
+      text="Maximum length is 14"
+    >
+    </ap-vmessage>
+  </div>
+
+  <button
+    [disabled]="signupForm.invalid || signupForm.pending"
+    class="btn btbn-primary btn-block"
+  >
+    Register
+  </button>
+
+  <p>Already a user? <a [routerLink]="['']">Sign In!</a></p>
+</form>
