@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  ValidationErrors
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validator';
 import { ValidatorFormError } from 'src/app/core/form/validator-form-error.service';
-import { UserNotTakenValidatorService } from '../../services/user-not-taken.validator.service';
+import { UserNotTakenValidatorService } from './services/user-not-taken.validator.service';
 import { NewUser } from '../../models/newUser';
 import { SignupService } from '../../services/signup.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'ap-signup',
-  templateUrl: './signup.component.html'
+  templateUrl: './signup.component.html',
+  providers: [UserNotTakenValidatorService]
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;

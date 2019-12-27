@@ -4,38 +4,33 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotFoundPageComponent } from './errors/components/not-found-page/not-found-page.component';
 import { PhotoListComponent } from './photos/components/photo-list/photo-list.component';
 import { PhotoListResolver } from './photos/components/photo-list/photo-list.resolver';
-import { SigninComponent } from './home/components/signin/signin.component';
-import { AuthGuard } from './core/auth/auth.guard';
 import { PermissionGuard } from './core/auth/permission.guard';
-import { SignupComponent } from './home/components/signup/signup.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SigninComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'signup',
-    component: SignupComponent
+    pathMatch: 'full',
+    redirectTo: 'home'
   },
   {
     path: 'user/:username',
+    pathMatch: 'full',
     redirectTo: 'photos/:username'
   },
   {
-    path: 'photos/:username',
-    component: PhotoListComponent,
-    resolve: {
-      photos: PhotoListResolver
-    },
-    canActivate: [PermissionGuard]
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: 'photos',
+    loadChildren: () =>
+      import('./photos/photos.module').then(m => m.PhotosModule)
   },
   { path: '**', component: NotFoundPageComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

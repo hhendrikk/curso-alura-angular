@@ -5,9 +5,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { SignupComponent } from './components/signup/signup.component';
 import { RouterModule } from '@angular/router';
+import { HomeComponent } from './home.component';
+import { HomeRoutingModule } from './home-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { SignupService } from './services/signup.service';
 
 @NgModule({
-  declarations: [SigninComponent, SignupComponent],
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, SharedModule]
+  declarations: [SigninComponent, SignupComponent, HomeComponent],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    ReactiveFormsModule,
+    SharedModule,
+    HomeRoutingModule
+  ],
+  providers: [SignupService]
 })
 export class HomeModule {}
