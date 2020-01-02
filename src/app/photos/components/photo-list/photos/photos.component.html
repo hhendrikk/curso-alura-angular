@@ -1,6 +1,10 @@
 <ol class="list-unstyled" *ngIf="photos.length > 0; else noPhotos">
   <li *ngFor="let cols of rows" class="row">
-    <div *ngFor="let photo of cols" class="col-4">
+    <div
+      *ngFor="let photo of cols"
+      class="col-4"
+      (click)="handleDetails(photo)"
+    >
       <ap-photo
         [url]="photo.url"
         [description]="photo.description"

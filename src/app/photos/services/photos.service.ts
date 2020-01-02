@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { IPhoto } from '../models/photo.model';
 import { INewPhoto } from '../models/newPhoto.models';
+import { PhotoDetail } from '../models/photoDetail.model';
 
 const API_URL = 'http://localhost:3000/';
 
@@ -32,5 +33,23 @@ export class PhotosService {
     formData.append('allowComments', newPhoto.allowComments.toString());
 
     return this.http.post(`${API_URL}photos/upload`, formData);
+  }
+
+  getById(id: number): Observable<PhotoDetail> {
+    return this.http.get<PhotoDetail>(`${API_URL}photos/${id}`);
+  }
+
+  getComments(photoId: number) {
+    return this.http.get<Comment[]>(`${API_URL}photos/${photoId}/comments`);
+  }
+
+  newComment(photoId: number, commentText: string) {
+    return this.http.post(`${API_URL}photos/${photoId}/comments`, {
+      commentText
+    });
+  }
+
+  remove(photoId: number) {
+    return this.http.delete(`${API_URL}photos/${photoId}`);
   }
 }

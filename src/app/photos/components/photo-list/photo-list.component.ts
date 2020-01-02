@@ -20,8 +20,10 @@ export class PhotoListComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: PhotosService) {}
 
   ngOnInit() {
-    this.username = this.route.snapshot.params.username;
-    this.photos = this.route.snapshot.data.photos;
+    this.route.params.subscribe(params => {
+      this.username = params.username;
+      this.photos = this.route.snapshot.data.photos;
+    });
   }
 
   load() {

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommentsLikesComponent } from './comments-likes/comments-likes.component';
 import { PhotoSearchComponent } from './photo-search/photo-search.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommentsLikesComponent,
     PhotoSearchComponent
   ],
-  imports: [CommonModule, HttpClientModule, SharedModule, PhotoModule]
+  imports: [
+    CommonModule,
+    RouterModule,
+    HttpClientModule,
+    SharedModule,
+    PhotoModule
+  ]
 })
 export class PhotoListModule {}

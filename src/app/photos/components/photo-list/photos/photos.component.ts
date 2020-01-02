@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IPhoto } from 'src/app/photos/models/photo.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ap-photos',
@@ -10,7 +11,7 @@ export class PhotosComponent implements OnChanges {
   @Input() photos: IPhoto[] = [];
   rows: any[] = [];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.photos) {
@@ -27,5 +28,9 @@ export class PhotosComponent implements OnChanges {
     }
 
     return newRows;
+  }
+
+  handleDetails(photo: IPhoto) {
+    this.router.navigate(['/photos/detail', photo.id]);
   }
 }
