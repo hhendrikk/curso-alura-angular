@@ -38,7 +38,6 @@ export class PhotosService {
   }
 
   getById(id: number): Observable<PhotoDetail> {
-    console.log(this.route.snapshot.params);
     return this.http.get<PhotoDetail>(`${API_URL}photos/${id}`);
   }
 
