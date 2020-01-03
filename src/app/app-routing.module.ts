@@ -26,7 +26,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./photos/photos.module').then(m => m.PhotosModule)
   },
-  { path: '**', component: NotFoundPageComponent }
+  { path: 'not-found', component: NotFoundPageComponent },
+  { path: '**', redirectTo: 'not-found' }
 ];
 
 @NgModule({

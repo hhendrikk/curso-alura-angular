@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 import { IPhoto } from '../models/photo.model';
 import { INewPhoto } from '../models/newPhoto.models';
 import { PhotoDetail } from '../models/photoDetail.model';
+import { map, catchError } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 const API_URL = 'http://localhost:3000/';
 
@@ -12,7 +14,7 @@ const API_URL = 'http://localhost:3000/';
   providedIn: 'root'
 })
 export class PhotosService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   listFromUsername(username: string): Observable<IPhoto[]> {
     return this.http.get<IPhoto[]>(`${API_URL}${username}/photos`);
@@ -36,6 +38,7 @@ export class PhotosService {
   }
 
   getById(id: number): Observable<PhotoDetail> {
+    console.log(this.route.snapshot.params);
     return this.http.get<PhotoDetail>(`${API_URL}photos/${id}`);
   }
 
@@ -51,5 +54,16 @@ export class PhotosService {
 
   remove(photoId: number) {
     return this.http.delete(`${API_URL}photos/${photoId}`);
+  }
+
+  like(photoId: number) {
+    return this.http
+      .post(`${API_URL}photos/${photoId}/like`, {}, { observe: 'response' })
+      .pipe(map(res => true))
+      .pipe(
+        catchError(err => {
+          return err.status === '304' ? of(false) : throwError(err);
+        })
+      );
   }
 }

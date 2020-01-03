@@ -4,6 +4,8 @@ import { ValidatorFormError } from 'src/app/core/form/validator-form-error.servi
 import { INewPhoto } from '../../models/newPhoto.models';
 import { PhotosService } from '../../services/photos.service';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/alert/alert.service';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'ap-photo-form',
@@ -19,6 +21,8 @@ export class PhotoFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private photoService: PhotosService,
     private router: Router,
+    private alert: AlertService,
+    private userService: UserService,
     public error: ValidatorFormError
   ) {}
 
@@ -36,8 +40,11 @@ export class PhotoFormComponent implements OnInit {
     const newPhoto = this.photoForm.getRawValue() as INewPhoto;
     newPhoto.file = this.file;
     this.photoService.upload(newPhoto).subscribe(
-      _ => this.router.navigate(['']),
-      error => console.log(error)
+      () => {
+        this.alert.success('Success operation upload photo!', true);
+        this.router.navigate(['/photos', this.userService.getUserName()]);
+      },
+      error => this.alert.danger('Error operation upload photo!', true)
     );
   }
 

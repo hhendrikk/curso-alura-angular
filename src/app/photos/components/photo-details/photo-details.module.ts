@@ -6,9 +6,14 @@ import { PhotoModule } from '../photo/photo.module';
 import { PhotoCommentsComponent } from './photo-comments/photo-comments.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { PhotoOwnerDirective } from './photo-owner.directive';
 
 @NgModule({
-  declarations: [PhotoDetailsComponent, PhotoCommentsComponent],
+  declarations: [
+    PhotoDetailsComponent,
+    PhotoCommentsComponent,
+    PhotoOwnerDirective
+  ],
   imports: [
     CommonModule,
     RouterModule,

@@ -11,6 +11,7 @@ import { CommentsLikesComponent } from './comments-likes/comments-likes.componen
 import { PhotoSearchComponent } from './photo-search/photo-search.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { PhotosService } from '../../services/photos.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     SharedModule,
     PhotoModule
-  ]
+  ],
+  providers: [PhotosService]
 })
 export class PhotoListModule {}

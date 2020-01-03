@@ -8,8 +8,20 @@
       <small>
         <p class="text-left break-word">{{ photo.description }}</p>
         <div class="text-left mb-4">
+          <span apShowIfLogged>
+            <i
+              (click)="like(photo)"
+              class="far fa-heart fa-2x mr-2 pull-left"
+            ></i>
+            {{ photo.likes }}
+          </span>
           <i class="far fa-comment fa-2x mr-2 ml-2"></i>{{ photo.comments }}
-          <i (click)="remove()" class="fas fa-trash fa-2x fa-pull-right"></i>
+          <i
+            apPhotoOwner
+            [photoOwner]="photo"
+            (click)="remove(photo)"
+            class="fas fa-trash fa-2x fa-pull-right"
+          ></i>
         </div>
         <hr />
       </small>
