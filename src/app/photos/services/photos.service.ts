@@ -14,7 +14,7 @@ const API_URL = 'http://localhost:3000/';
   providedIn: 'root'
 })
 export class PhotosService {
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(private http: HttpClient) {}
 
   listFromUsername(username: string): Observable<IPhoto[]> {
     return this.http.get<IPhoto[]>(`${API_URL}${username}/photos`);
